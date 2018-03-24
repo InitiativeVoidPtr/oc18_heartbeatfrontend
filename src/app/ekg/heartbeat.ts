@@ -1,4 +1,9 @@
+import {Note} from '../music/note';
+
 export class Heartbeat {
 
-  constructor(public timestamp: Date, public bpm: number) {}
+  note: Note;
+
+  constructor(public timestamp: Date, public bpm: number) {
+  }
 }

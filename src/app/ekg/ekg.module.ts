@@ -6,15 +6,17 @@ import {EkgTableComponent} from './ekg-table/ekg-table.component';
 import {BackendService} from './backend.service';
 import {HttpClientModule} from '@angular/common/http';
 import {NgxChartsModule} from '@swimlane/ngx-charts';
+import {MockBackendService} from './mock-backend.service';
+import {MusicModule} from '../music/music.module';
 
 @NgModule({
   imports: [
-    CommonModule, HttpClientModule, NgxChartsModule
+    CommonModule, HttpClientModule, NgxChartsModule, MusicModule
   ],
   declarations: [EkgOverviewComponent, EkgTableComponent, EkgChartComponent],
   exports: [EkgOverviewComponent, EkgTableComponent, EkgChartComponent],
   providers: [
-    {provide: BackendService, useClass: BackendService}
+    {provide: BackendService, useClass: MockBackendService}
   ]
 })
 export class EkgModule { }
