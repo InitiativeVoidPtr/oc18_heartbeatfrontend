@@ -15,9 +15,9 @@ export class MockBackendService extends BackendService {
   getDevices(): Observable<Device[]> {
     return Observable.create(observer => {
       observer.next([
-        new Device('42', 'Test0'),
-        new Device('43', 'Test1'),
-        new Device('44', 'Test2')
+        new Device('42', 'Device 0'),
+        new Device('43', 'Device 1'),
+        new Device('44', 'Device 2')
       ]);
     });
   }

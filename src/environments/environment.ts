@@ -5,5 +5,5 @@
 
 export const environment = {
   production: false,
-  backendUrl: 'http://oc-backend.die-softwareklitsche.de'
+  backendUrl: 'http://localhost:8080'
 };
