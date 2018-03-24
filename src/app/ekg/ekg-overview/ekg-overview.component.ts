@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Device} from '../device';
 import {Heartbeat} from '../heartbeat';
+import {BackendService} from '../backend.service';
 
 @Component({
   selector: 'app-ekg-overview',
@@ -12,19 +13,21 @@ export class EkgOverviewComponent implements OnInit {
   public devices: Device[] = [];
   public beatMap: Map<string, Heartbeat[]> = new Map<string, Heartbeat[]>();
 
-  constructor() {
-    const device = new Device('42', 'Test');
-    this.beatMap.set(device.id, [
-      new Heartbeat(new Date(), 72),
-      new Heartbeat(new Date(), 120),
-      new Heartbeat(new Date(), 55),
-      new Heartbeat(new Date(), 56),
-      new Heartbeat(new Date(), 72)
-    ]);
+  constructor(private backendService: BackendService) {
+    this.backendService.getDevices().subscribe(devices => {
+      this.devices = devices;
 
-    this.devices.push(device);
+      this.devices.forEach(device => {
+        this.subscribeToDeviceHeartbeats(device);
+      });
+    });
 
-    console.log(this.beatMap.get('42'));
+  }
+
+  private subscribeToDeviceHeartbeats(device) {
+    this.backendService.getHeartbeatsForDevice(device.id, 10).subscribe(heartbeats => {
+      this.beatMap.set(device.id, heartbeats);
+    });
   }
 
   ngOnInit() {

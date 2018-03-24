@@ -3,12 +3,18 @@ import {CommonModule} from '@angular/common';
 import {EkgChartComponent} from './ekg-chart/ekg-chart.component';
 import {EkgOverviewComponent} from './ekg-overview/ekg-overview.component';
 import {EkgTableComponent} from './ekg-table/ekg-table.component';
+import {BackendService} from './backend.service';
+import {MockBackendService} from './mock-backend.service';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule, HttpClientModule
   ],
   declarations: [EkgOverviewComponent, EkgTableComponent, EkgChartComponent],
-  exports: [EkgOverviewComponent, EkgTableComponent, EkgChartComponent]
+  exports: [EkgOverviewComponent, EkgTableComponent, EkgChartComponent],
+  providers: [
+    {provide: BackendService, useClass: MockBackendService}
+  ]
 })
 export class EkgModule { }
