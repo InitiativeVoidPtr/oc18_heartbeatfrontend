@@ -27,6 +27,7 @@ export class EkgOverviewComponent implements OnInit {
   private subscribeToDeviceHeartbeats(device) {
     this.backendService.getHeartbeatsForDevice(device.id, 10).subscribe(heartbeats => {
       this.beatMap.set(device.id, heartbeats);
+      this.beatMap = new Map(this.beatMap);
     });
   }
 

@@ -5,6 +5,7 @@ import {NgModule} from '@angular/core';
 import {AppComponent} from './app.component';
 import {CommonModule} from '@angular/common';
 import {EkgModule} from './ekg/ekg.module';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 
 @NgModule({
@@ -12,7 +13,7 @@ import {EkgModule} from './ekg/ekg.module';
     AppComponent
   ],
   imports: [
-    BrowserModule, CommonModule, EkgModule
+    BrowserModule, CommonModule, BrowserAnimationsModule, EkgModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -7,7 +7,7 @@
   </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let beat of data.reverse()">
+  <tr *ngFor="let beat of reversedData()">
     <td>{{beat.timestamp | date:'mediumTime'}}</td>
     <td>{{beat.bpm}}</td>
     <td>*</td>
