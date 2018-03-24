@@ -1,17 +1,13 @@
 <div class="tile is-ancestor">
-  <div class="tile is-parent is-7">
+  <div class="tile is-parent is-6">
     <div class="tile is-child box">
       <app-ekg-chart [data]="beatMap" [devices]="devices"></app-ekg-chart>
     </div>
   </div>
-  <div class="tile is-parent is-5">
-    <div class="tile is-child box" *ngIf="deviceById('42') != null">
-      <p class="title">{{deviceById('42').name}}</p>
-      <app-ekg-table [data]="beatMap.get('42')"></app-ekg-table>
-    </div>
-    <div class="tile is-child box" *ngIf="deviceById('43') != null">
-      <p class="title">{{deviceById('43').name}}</p>
-      <app-ekg-table [data]="beatMap.get('43')"></app-ekg-table>
+  <div class="tile is-parent is-6">
+    <div class="tile is-child box" *ngFor="let device of devices">
+      <p class="title">{{device.name}}</p>
+      <app-ekg-table [data]="beatMap.get(device.id)"></app-ekg-table>
     </div>
   </div>
 </div>
