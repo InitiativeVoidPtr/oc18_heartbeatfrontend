@@ -3,14 +3,14 @@
   <tr>
     <th>Time</th>
     <th>BPM</th>
-    <th>Note</th>
+    <th hidden>Note</th>
   </tr>
   </thead>
   <tbody>
   <tr *ngFor="let beat of reversedData()">
     <td>{{beat.timestamp | date:'mediumTime'}}</td>
     <td>{{beat.bpm}}</td>
-    <td>*</td>
+    <td hidden>*</td>
   </tr>
   </tbody>
 </table>

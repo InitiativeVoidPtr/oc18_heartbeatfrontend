@@ -31,6 +31,10 @@ export class EkgOverviewComponent implements OnInit {
     });
   }
 
+  deviceById(id: string): Device {
+    return this.devices.find(device => device.id === id);
+  }
+
   ngOnInit() {
   }
 
