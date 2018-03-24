@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {Heartbeat} from '../heartbeat';
 
 @Component({
   selector: 'app-ekg-table',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EkgTableComponent implements OnInit {
 
-  constructor() { }
+  @Input()
+  data: Heartbeat[] = [];
+
+  constructor() {
+  }
 
   ngOnInit() {
+    console.log(this.data);
   }
 
 }

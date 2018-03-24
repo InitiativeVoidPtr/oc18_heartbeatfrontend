@@ -4,17 +4,15 @@ import {NgModule} from '@angular/core';
 
 import {AppComponent} from './app.component';
 import {CommonModule} from '@angular/common';
-import {EkgOverviewComponent} from './ekg-overview/ekg-overview.component';
-import { EkgTableComponent } from './ekg-table/ekg-table.component';
-import { EkgChartComponent } from './ekg-chart/ekg-chart.component';
+import {EkgModule} from './ekg/ekg.module';
 
 
 @NgModule({
   declarations: [
-    AppComponent, EkgOverviewComponent, EkgTableComponent, EkgChartComponent
+    AppComponent
   ],
   imports: [
-    BrowserModule, CommonModule
+    BrowserModule, CommonModule, EkgModule
   ],
   providers: [],
   bootstrap: [AppComponent]

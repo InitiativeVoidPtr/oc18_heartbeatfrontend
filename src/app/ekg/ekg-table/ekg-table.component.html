@@ -1,0 +1,16 @@
+<table class="table is-hoverable is-bordered">
+  <thead>
+  <tr>
+    <th>Time</th>
+    <th>BPM</th>
+    <th>Note</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let beat of data.reverse()">
+    <td>{{beat.timestamp | date:'mediumTime'}}</td>
+    <td>{{beat.bpm}}</td>
+    <td>*</td>
+  </tr>
+  </tbody>
+</table>
