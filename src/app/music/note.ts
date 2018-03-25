@@ -8,6 +8,9 @@ export class Note {
 
   constructor(public midiValue: number) {
     const name = MIDIUtils.noteNumberToName(midiValue);
+    if (!name) {
+      throw new Error('Midi Value ' + midiValue + ' cannot be mapped');
+    }
     this.formatNameAndSetAttributes(name);
   }
 

@@ -18,7 +18,7 @@ export class EkgTableComponent implements OnInit {
     if (this.data == null) {
       return [];
     }
-    return this.data.reverse();
+    return [...this.data].reverse();
   }
 
   ngOnInit() {

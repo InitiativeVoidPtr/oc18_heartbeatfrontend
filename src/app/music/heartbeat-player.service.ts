@@ -38,15 +38,24 @@ export class HeartbeatPlayerService {
     }
 
     for (let i = 0; i < 4; i++) {
-      const lower = new Note(note.midiValue - i);
-      if (this.isInScale(lower)) {
-        return lower;
+      const lowerValue = note.midiValue - i;
+      if (lowerValue >= HeartbeatPlayerService.MIN_MIDI_VALUE) {
+        const lower = new Note(lowerValue);
+        if (this.isInScale(lower)) {
+          return lower;
+        }
       }
-      const higher = new Note(note.midiValue + i);
-      if (this.isInScale(higher)) {
-        return higher;
+
+      const higherValue = note.midiValue + i;
+      if (higherValue <= HeartbeatPlayerService.MAX_MIDI_VALUE) {
+        const higher = new Note(higherValue);
+        if (this.isInScale(higher)) {
+          return higher;
+        }
       }
     }
+
+    throw new Error('Note ' + note.toString() + ' cannot be mapped to scale');
   }
 
   private isInScale(current: Note) {
@@ -54,8 +63,19 @@ export class HeartbeatPlayerService {
   }
 
   private transformBpmToMidiValue(bpm: number): number {
+    const borderedBpm = this.assureIsInBorders(bpm);
     const scale = (HeartbeatPlayerService.MAX_MIDI_VALUE - HeartbeatPlayerService.MIN_MIDI_VALUE)
       / (this.maxBpmValue - this.minBpmValue);
-    return Math.round((bpm - this.minBpmValue) * scale);
+    return Math.round((borderedBpm - this.minBpmValue) * scale);
+  }
+
+  private assureIsInBorders(bpm: number): number {
+    if (bpm >= this.maxBpmValue) {
+      return this.maxBpmValue;
+    }
+    if (bpm <= this.minBpmValue) {
+      return this.minBpmValue;
+    }
+    return bpm;
   }
 }

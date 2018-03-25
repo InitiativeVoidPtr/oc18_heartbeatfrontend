@@ -1,16 +1,20 @@
+<p class="subtitle">
+  <i class="fa fa-heart"></i>{{reversedData()[0].bpm}}
+  <i class="fa fa-music"></i>{{reversedData()[0].note.toString()}}
+</p>
 <table class="table is-hoverable is-bordered">
   <thead>
-  <tr>
-    <th><i class="fa fa-clock-o"></i></th>
-    <th><i class="fa fa-heart"></i></th>
-    <th><i class="fa fa-music"></i></th>
-  </tr>
+    <tr>
+      <th><i class="fa fa-clock-o"></i></th>
+      <th><i class="fa fa-heart"></i></th>
+      <th><i class="fa fa-music"></i></th>
+    </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let beat of reversedData()">
-    <td>{{beat.timestamp | date:'h:mm:ss'}}</td>
-    <td>{{beat.bpm}}</td>
-    <td>{{(beat.note) ? beat.note : '*'}}</td>
-  </tr>
+    <tr *ngFor="let beat of reversedData()">
+      <td>{{beat.timestamp | date:'h:mm:ss'}}</td>
+      <td>{{beat.bpm}}</td>
+      <td>{{(beat.note) ? beat.note : '*'}}</td>
+    </tr>
   </tbody>
 </table>
