@@ -34,7 +34,6 @@ export class BackendService {
               if (value && value.length > 0) {
                 for (let i = 0; i < 5; i++) {
                   const newValue = [...value].slice(i);
-                  console.log(newValue);
                   setTimeout(() => {
                     observer.next(newValue);
                   }, 1000 * (5 - i));
