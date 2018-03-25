@@ -20,14 +20,29 @@ export class BackendService {
   getDevices(): Observable<Device[]> {
     return Observable.interval(1000)
       .mergeMap(() => this.http.get(this.backendUrl + '/devices')
-      .map(data => data['_embedded']['devices']));
+        .map(data => data['_embedded']['devices']));
   }
 
   getHeartbeatsForDevice(id: string, pageSize: number): Observable<Heartbeat[]> {
-    return this.http.get(this.backendUrl + '/devices/' + id + '/heartbeats?size=' + pageSize)
-      .map(data =>
-        data['_embedded']['heartbeats']
-          .map(beat => new Heartbeat(new Date(beat['timeStamp']), beat['value'])));
+    return Observable.interval(5000)
+      .mergeMap(() => {
+        return Observable.create((observer) => {
+          this.http.get(this.backendUrl + '/devices/' + id + '/heartbeats')
+            .map(data => data['_embedded']['heartbeats']
+              .map(beat => new Heartbeat(new Date(beat['timeStamp']), beat['value'])))
+            .subscribe(value => {
+              if (value && value.length > 0) {
+                for (let i = 0; i < 5; i++) {
+                  const newValue = [...value].slice(i);
+                  console.log(newValue);
+                  setTimeout(() => {
+                    observer.next(newValue);
+                  }, 1000 * (5 - i));
+                }
+              }
+            });
+        });
+      });
   }
 
 }

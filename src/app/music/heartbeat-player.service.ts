@@ -28,6 +28,7 @@ export class HeartbeatPlayerService {
 
   playNote(note: Note) {
     if (!this.mute) {
+      console.log(note.toString());
       this.synth.triggerAttackRelease(note.toString(), '2n');
     }
   }

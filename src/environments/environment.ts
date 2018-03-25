@@ -5,5 +5,5 @@
 
 export const environment = {
   production: false,
-  backendUrl: 'http://die-softwareklitsche:80'
+  backendUrl: 'http://die-softwareklitsche.de:80'
 };
