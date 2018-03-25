@@ -16,7 +16,7 @@ import {MusicModule} from '../music/music.module';
   declarations: [EkgOverviewComponent, EkgTableComponent, EkgChartComponent],
   exports: [EkgOverviewComponent, EkgTableComponent, EkgChartComponent],
   providers: [
-    {provide: BackendService, useClass: MockBackendService}
+    {provide: BackendService, useClass: BackendService}
   ]
 })
 export class EkgModule { }
