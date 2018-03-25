@@ -1,4 +1,4 @@
-<p class="subtitle" *ngIf="data[0]">
+<p class="subtitle" *ngIf="data && data[0]">
   <i class="fa fa-heart"></i>{{data[0].bpm}}
   <i class="fa fa-music"></i>{{data[0].note.toString()}}
 </p>
