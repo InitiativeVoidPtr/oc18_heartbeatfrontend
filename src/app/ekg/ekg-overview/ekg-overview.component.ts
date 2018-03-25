@@ -32,7 +32,7 @@ export class EkgOverviewComponent implements OnInit {
 
       this.beatMap.set(device.id, heartbeatsWithNotes);
       this.beatMap = new Map(this.beatMap);
-      this.player.playNote(heartbeatsWithNotes[heartbeatsWithNotes.length - 1].note);
+      this.player.playNote(heartbeatsWithNotes[0].note);
     });
   }
 
