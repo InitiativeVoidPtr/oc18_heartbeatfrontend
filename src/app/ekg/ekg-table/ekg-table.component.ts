@@ -14,13 +14,6 @@ export class EkgTableComponent implements OnInit {
   constructor() {
   }
 
-  reversedData(): Heartbeat[] {
-    if (this.data == null) {
-      return [];
-    }
-    return [...this.data].reverse();
-  }
-
   ngOnInit() {
   }
 
