@@ -27,13 +27,15 @@ export class EkgOverviewComponent implements OnInit {
 
   private subscribeToDeviceHeartbeats(device) {
     this.backendService.getHeartbeatsForDevice(device.id, 10).subscribe(heartbeats => {
-      let heartbeatsWithNotes = this.addNotesToHeartbeats(heartbeats);
-      this.sortHeartBeatsByTimestampDesc(heartbeatsWithNotes);
-      heartbeatsWithNotes = heartbeatsWithNotes.slice(0, 10);
+      if (heartbeats && heartbeats.length > 0) {
+        let heartbeatsWithNotes = this.addNotesToHeartbeats(heartbeats);
+        this.sortHeartBeatsByTimestampDesc(heartbeatsWithNotes);
+        heartbeatsWithNotes = heartbeatsWithNotes.slice(0, 10);
 
-      this.beatMap.set(device.id, heartbeatsWithNotes);
-      this.beatMap = new Map(this.beatMap);
-      this.player.playNote(heartbeatsWithNotes[0].note);
+        this.beatMap.set(device.id, heartbeatsWithNotes);
+        this.beatMap = new Map(this.beatMap);
+        this.player.playNote(heartbeatsWithNotes[0].note);
+      }
     });
   }
 
