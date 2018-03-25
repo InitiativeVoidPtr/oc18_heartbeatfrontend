@@ -33,7 +33,24 @@ export class HeartbeatPlayerService {
   }
 
   private mapNoteToPentatonicScale(note: Note) {
-    return note; // TODO
+    if (this.isInScale(note)) {
+      return note;
+    }
+
+    for (let i = 0; i < 4; i++) {
+      const lower = new Note(note.midiValue - i);
+      if (this.isInScale(lower)) {
+        return lower;
+      }
+      const higher = new Note(note.midiValue + i);
+      if (this.isInScale(higher)) {
+        return higher;
+      }
+    }
+  }
+
+  private isInScale(current: Note) {
+    return this.scale.indexOf(current.name) >= 0;
   }
 
   private transformBpmToMidiValue(bpm: number): number {

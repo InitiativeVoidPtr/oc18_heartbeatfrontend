@@ -14,7 +14,7 @@ import {MusicModule} from './music/music.module';
     AppComponent
   ],
   imports: [
-    BrowserModule, CommonModule, BrowserAnimationsModule, EkgModule
+    BrowserModule, CommonModule, BrowserAnimationsModule, EkgModule, MusicModule
   ],
   providers: [],
   bootstrap: [AppComponent]

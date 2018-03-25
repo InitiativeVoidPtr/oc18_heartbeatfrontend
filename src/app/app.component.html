@@ -9,6 +9,12 @@
       </h2>
     </div>
   </div>
+  <div class="hero-foot">
+    <button class="button" (click)="player.mute = !player.mute">
+      <i class="fa fa-volume-up" *ngIf="!player.mute"></i>
+      <i class="fa fa-volume-off" *ngIf="player.mute"></i>
+    </button>
+  </div>
 </section>
 <section class="section">
   <div class="container">
