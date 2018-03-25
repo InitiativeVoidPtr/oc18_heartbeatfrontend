@@ -10,6 +10,7 @@ export class HeartbeatPlayerService {
   private static MAX_MIDI_VALUE = 126;
   private static MIN_MIDI_VALUE = 0;
 
+  mute = true;
   maxBpmValue = 150;
   minBpmValue = 30;
   scale = ['C', 'D', 'E', 'G', 'A'];
@@ -26,7 +27,9 @@ export class HeartbeatPlayerService {
   }
 
   playNote(note: Note) {
-    this.synth.triggerAttackRelease(note.toString(), '2n');
+    if (!this.mute) {
+      this.synth.triggerAttackRelease(note.toString(), '2n');
+    }
   }
 
   private mapNoteToPentatonicScale(note: Note) {

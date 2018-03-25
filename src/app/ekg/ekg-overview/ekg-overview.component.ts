@@ -14,7 +14,7 @@ export class EkgOverviewComponent implements OnInit {
   public devices: Device[] = [];
   public beatMap: Map<string, Heartbeat[]> = new Map<string, Heartbeat[]>();
 
-  constructor(private backendService: BackendService, private player: HeartbeatPlayerService) {
+  constructor(private backendService: BackendService, public player: HeartbeatPlayerService) {
     this.backendService.getDevices().subscribe(devices => {
       this.devices = devices;
 
@@ -27,11 +27,17 @@ export class EkgOverviewComponent implements OnInit {
 
   private subscribeToDeviceHeartbeats(device) {
     this.backendService.getHeartbeatsForDevice(device.id, 10).subscribe(heartbeats => {
-      this.beatMap.set(device.id, heartbeats.map(beat => {
-        beat.note = this.player.mapBpmToNote(beat.bpm);
-        return beat;
-      }));
+      const heartbeats = this.addNotesToHeartbeats(heartbeats);
+      this.beatMap.set(device.id, heartbeats);
       this.beatMap = new Map(this.beatMap);
+      this.player.playNote(heartbeats[heartbeats.length - 1].note);
+    });
+  }
+
+  private addNotesToHeartbeats(heartbeats) {
+    return heartbeats.map(beat => {
+      beat.note = this.player.mapBpmToNote(beat.bpm);
+      return beat;
     });
   }
 
