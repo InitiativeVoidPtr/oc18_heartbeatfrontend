@@ -7,8 +7,8 @@ const Tone = require('tone');
 @Injectable()
 export class HeartbeatPlayerService {
 
-  private static MAX_MIDI_VALUE = 126;
-  private static MIN_MIDI_VALUE = 0;
+  private static MAX_MIDI_VALUE = 107;
+  private static MIN_MIDI_VALUE = 36; // tones below are too deep for laptop speakers
 
   mute = true;
   maxBpmValue = 150;
@@ -66,7 +66,7 @@ export class HeartbeatPlayerService {
     const borderedBpm = this.assureIsInBorders(bpm);
     const scale = (HeartbeatPlayerService.MAX_MIDI_VALUE - HeartbeatPlayerService.MIN_MIDI_VALUE)
       / (this.maxBpmValue - this.minBpmValue);
-    return Math.round((borderedBpm - this.minBpmValue) * scale);
+    return Math.round((borderedBpm - this.minBpmValue) * scale) + HeartbeatPlayerService.MIN_MIDI_VALUE;
   }
 
   private assureIsInBorders(bpm: number): number {
